@@ -1,6 +1,6 @@
 import express from "express"; // Importing the Express framework
 import client from "prom-client"; // Importing the prom-client for metrics collection
-import { requestCount } from "./monitoring/requestCounter"; // Importing the request counting middleware
+import { activeUser } from "./monitoring/requestGauge";
 
 const app = express(); // Creating an instance of an Express application
 
@@ -9,7 +9,7 @@ app.use(express.json());
 
 // Use requestCount middleware without invoking it
 // This middleware will track HTTP requests and their metrics
-app.use(requestCount);
+app.use(activeUser);
 
 // Route to get user information
 app.get("/user", async (req, res) => {
